@@ -68,7 +68,7 @@ class Element:
 
         self.L = np.sqrt((self.nodes[1].x - self.nodes[0].x)**2.0 + (self.nodes[1].z - self.nodes[0].z)**2.0)
         
-        alpha = -np.arctan2(self.nodes[1].z - self.nodes[0].z, self.nodes[1].x - self.nodes[0].x)
+        alpha = np.arctan2(-(self.nodes[1].z - self.nodes[0].z), (self.nodes[1].x - self.nodes[0].x))
 
         T = np.zeros((6, 6))
 
@@ -138,7 +138,7 @@ class Element:
         k[1, 2] = k[2, 1] = k[1, 5] = k[5, 1] = - 6 * EI / L**2
         k[2, 4] = k[4, 2] = k[4, 5] = k[5, 4] = 6 * EI / L**2
         
-        k[1, 1] = k[5, 5] = 12 * EI / L**3
+        k[1, 1] = k[4, 4] = 12 * EI / L**3
         k[1, 4] = k[4, 1] = -12 * EI / L**3
 
         return np.matmul(np.matmul(self.Tt, k), self.T)

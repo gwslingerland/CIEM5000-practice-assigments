@@ -80,9 +80,7 @@ class Constrainer:
         """
         self.free_dofs = [i for i in range(len(f)) if i not in self.cons_dofs]
         
-        ixgrid = np.ix_(self.free_dofs, self.free_dofs)
-        
-        Kff = k[ixgrid]
+        Kff = k[np.ix_(self.free_dofs, self.free_dofs)]
         Ff = f[self.free_dofs]
 
         return Kff, Ff
